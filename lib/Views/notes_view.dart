@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/Widgets/notes_item_card.dart';
 
 class NotesView extends StatelessWidget {
   const NotesView({super.key});
@@ -8,7 +9,7 @@ class NotesView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Notes',
+          '  Notes',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 26,
@@ -16,7 +17,7 @@ class NotesView extends StatelessWidget {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 10.0),
+            padding: const EdgeInsets.only(right: 25.0),
             child: Card(
               child: IconButton(
                 onPressed: () {},
@@ -28,6 +29,12 @@ class NotesView extends StatelessWidget {
             ),
           ),
         ],
+      ),
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          return NotesItem();
+        },
+        itemCount: 6,
       ),
     );
   }
