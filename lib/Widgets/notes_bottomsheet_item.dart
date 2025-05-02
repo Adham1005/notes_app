@@ -12,8 +12,6 @@ class NotesBottomSheetItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 40),
       child: SingleChildScrollView(
         child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          // mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CustomTextFormField(hintText: 'Title'),
             SizedBox(
