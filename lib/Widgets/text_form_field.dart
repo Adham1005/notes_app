@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final bool obscureText;
-  final String labelText;
+  final String hintText;
   final IconData? prefixIcon;
   final Function(String?)? onChanged;
   final String? Function(String?)? validate;
@@ -12,7 +12,7 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
     this.obscureText = false,
-    required this.labelText,
+    required this.hintText,
     this.prefixIcon,
     this.onChanged,
     this.validate,
@@ -33,20 +33,20 @@ class CustomTextFormField extends StatelessWidget {
         //   prefixIcon,
         // ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white, width: 1),
+          borderSide: BorderSide(color: Colors.cyan, width: 1),
           borderRadius: BorderRadius.circular(8),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white, width: 2),
+          borderSide: BorderSide(color: Colors.cyan, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.red, width: 2),
         ),
-        labelText: labelText,
-        labelStyle: TextStyle(
+        // labelText: labelText,
+        hintText: hintText,
+        hintStyle: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Colors.cyan,
         ),
         floatingLabelStyle: TextStyle(
           fontSize: 16,
