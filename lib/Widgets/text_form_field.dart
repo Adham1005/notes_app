@@ -5,6 +5,7 @@ class CustomTextFormField extends StatelessWidget {
   final String hintText;
   final IconData? prefixIcon;
   final Function(String?)? onChanged;
+  final void Function(String?)? onSaved;
   final String? Function(String?)? validate;
   final TextInputType? textInputType;
   final int? maxLines;
@@ -15,6 +16,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.hintText,
     this.prefixIcon,
     this.onChanged,
+    this.onSaved,
     this.validate,
     this.textInputType,
     this.maxLines,
@@ -23,11 +25,18 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      validator: validate,
+      validator: (value) {
+        if (value?.isEmpty ?? true) {
+          return 'Field is empty';
+        } else {
+          return null;
+        }
+      },
       obscureText: obscureText,
       onChanged: onChanged,
       keyboardType: textInputType,
       maxLines: maxLines,
+      onSaved: onSaved,
       decoration: InputDecoration(
         // prefixIcon: Icon(
         //   prefixIcon,
