@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/Widgets/notes_bottomsheet_item.dart';
 import 'package:notes_app/Widgets/notes_item_card.dart';
 
 class NotesView extends StatelessWidget {
@@ -30,11 +31,34 @@ class NotesView extends StatelessWidget {
           ),
         ],
       ),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return NotesItem();
-        },
-        itemCount: 6,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        child: ListView.builder(
+          padding: EdgeInsets.zero,
+          itemBuilder: (context, index) {
+            return NotesItem();
+          },
+          itemCount: 6,
+        ),
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(right: 12.0),
+        child: FloatingActionButton(
+          onPressed: () {
+            showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return NotesBottomSheetItem();
+                });
+          },
+          backgroundColor: Colors.white,
+          shape: CircleBorder(),
+          child: Icon(
+            Icons.add,
+            color: Colors.black,
+            size: 28,
+          ),
+        ),
       ),
     );
   }
