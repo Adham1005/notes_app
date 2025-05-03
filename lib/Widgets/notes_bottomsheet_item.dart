@@ -24,7 +24,9 @@ class NotesBottomSheetItem extends StatelessWidget {
             },
             builder: (context, state) {
               if (state is AddNoteLoading) {
-                return CircularProgressIndicator();
+                return AbsorbPointer(
+                  absorbing: true,
+                );
               }
               return AddNoteForm();
             },

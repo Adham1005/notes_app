@@ -4,9 +4,11 @@ class CustomButton extends StatelessWidget {
   final IconData? icon;
   final String text;
   final VoidCallback onPressed;
+  final bool isLoading;
   const CustomButton({
     super.key,
     this.icon,
+    this.isLoading = false,
     required this.text,
     required this.onPressed,
   });
@@ -22,21 +24,19 @@ class CustomButton extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Icon(
-          //   icon,
-          //   size: 26,
-          //   color: Colors.black,
-          // ),
-          // SizedBox(width: 8),
-          Text(
-            text,
-            style: TextStyle(fontSize: 26, color: Colors.black),
-          ),
-        ],
-      ),
+      child: isLoading
+          ? SizedBox(
+              child: Center(
+                  child: CircularProgressIndicator(
+                color: Colors.black,
+              )),
+            )
+          : Center(
+              child: Text(
+                text,
+                style: TextStyle(fontSize: 26, color: Colors.black),
+              ),
+            ),
     );
   }
 }

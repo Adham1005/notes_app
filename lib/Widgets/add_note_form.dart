@@ -6,8 +6,11 @@ import 'package:notes_app/Widgets/custom_button.dart';
 import 'package:notes_app/Widgets/text_form_field.dart';
 
 class AddNoteForm extends StatefulWidget {
+  final isLoading;
+
   const AddNoteForm({
     super.key,
+    this.isLoading = false,
   });
 
   @override
@@ -45,23 +48,28 @@ class _AddNoteFormState extends State<AddNoteForm> {
           const SizedBox(
             height: 50,
           ),
-          CustomButton(
-              text: 'Add',
-              onPressed: () {
-                if (formKey.currentState!.validate()) {
-                  formKey.currentState!.save();
-                  var noteModel = NoteModel(
-                      title: title!,
-                      subTitle: subTitle!,
-                      date: DateTime.now().toString(),
-                      color: Colors.yellow.value);
-                  BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
-                } else {
-                  setState(() {
-                    autoValidateMode = AutovalidateMode.always;
+          BlocBuilder<AddNoteCubit, AddNoteState>(
+            builder: (context, state) {
+              return CustomButton(
+                  isLoading: state is AddNoteLoading ? true : false,
+                  text: 'Add',
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      formKey.currentState!.save();
+                      var noteModel = NoteModel(
+                          title: title!,
+                          subTitle: subTitle!,
+                          date: DateTime.now().toString(),
+                          color: Colors.yellow.value);
+                      BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
+                    } else {
+                      setState(() {
+                        autoValidateMode = AutovalidateMode.always;
+                      });
+                    }
                   });
-                }
-              }),
+            },
+          ),
         ],
       ),
     );
