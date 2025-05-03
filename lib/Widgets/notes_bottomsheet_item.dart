@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/Widgets/text_form_field.dart';
-
-import 'custom_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app/Cubits/Add_note/add_note_cubit.dart';
+import 'package:notes_app/Widgets/add_note_form.dart';
 
 class NotesBottomSheetItem extends StatelessWidget {
   const NotesBottomSheetItem({super.key});
@@ -11,64 +11,22 @@ class NotesBottomSheetItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 40),
       child: SingleChildScrollView(
-        child: AddNoteFromState(),
-      ),
-    );
-  }
-}
-
-class AddNoteFromState extends StatefulWidget {
-  const AddNoteFromState({
-    super.key,
-  });
-
-  @override
-  State<AddNoteFromState> createState() => _AddNoteFromStateState();
-}
-
-class _AddNoteFromStateState extends State<AddNoteFromState> {
-  final GlobalKey<FormState> formKey = GlobalKey();
-  AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
-  String? title, subTitle;
-
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      autovalidateMode: autoValidateMode,
-      child: Column(
-        children: [
-          CustomTextFormField(
-            hintText: 'Title',
-            onSaved: (value) {
-              title = value;
-            },
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          CustomTextFormField(
-            hintText: 'Content',
-            maxLines: 5,
-            onSaved: (value) {
-              subTitle = value;
-            },
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-          CustomButton(
-              text: 'Add',
-              onPressed: () {
-                if (formKey.currentState!.validate()) {
-                  formKey.currentState!.save();
-                } else {
-                  setState(() {
-                    autoValidateMode = AutovalidateMode.always;
-                  });
-                }
-              }),
-        ],
+        child: BlocConsumer<AddNoteCubit, AddNoteState>(
+          listener: (context, state) {
+            if (state is AddNoteSuccess) {
+              Navigator.pop(context);
+            }
+            if (state is AddNoteFailure) {
+              print('Failed ${state.errorMessage}');
+            }
+          },
+          builder: (context, state) {
+            if (state is AddNoteLoading) {
+              return CircularProgressIndicator();
+            }
+            return AddNoteForm();
+          },
+        ),
       ),
     );
   }
