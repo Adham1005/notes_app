@@ -9,7 +9,7 @@ void main() async {
   await Hive.initFlutter();
   Bloc.observer = CubitObserver();
   Hive.registerAdapter(NoteModelAdapter());
-  await Hive.openBox('notes_box');
+  await Hive.openBox<NoteModel>('notes_box');
   runApp(const MyApp());
 }
 
