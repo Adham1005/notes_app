@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:notes_app/Models/note_model.dart';
 import 'package:notes_app/Views/edit_notes_view.dart';
 
@@ -46,7 +47,9 @@ class NotesItem extends StatelessWidget {
                 ),
                 IconButton(
                   color: Colors.transparent,
-                  onPressed: () {},
+                  onPressed: () {
+                    note.delete();
+                  },
                   icon: Icon(
                     Icons.delete,
                     color: Colors.black87,
