@@ -46,6 +46,7 @@ class NotesView extends StatelessWidget {
         child: FloatingActionButton(
           onPressed: () {
             showModalBottomSheet(
+                isScrollControlled: true,
                 context: context,
                 builder: (context) {
                   return NotesBottomSheetItem();

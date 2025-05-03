@@ -11,7 +11,7 @@ class NotesBottomSheetItem extends StatelessWidget {
     return BlocProvider(
       create: (context) => AddNoteCubit(),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 40),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 20),
         child: SingleChildScrollView(
           child: BlocConsumer<AddNoteCubit, AddNoteState>(
             listener: (context, state) {
@@ -28,7 +28,14 @@ class NotesBottomSheetItem extends StatelessWidget {
                   absorbing: true,
                 );
               }
-              return AddNoteForm();
+              return Padding(
+                padding: EdgeInsets.only(
+                  left: 4,
+                  right: 4,
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: AddNoteForm(),
+              );
             },
           ),
         ),
